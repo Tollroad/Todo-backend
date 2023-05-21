@@ -20,7 +20,7 @@ export const newTask = async (req, res, next) => {
   }
 };
 
-export const getAllTasks = async (req, res) => {
+export const getAllTasks = async (req, res,next) => {
  try {
   const checkId = req.user._id;
 

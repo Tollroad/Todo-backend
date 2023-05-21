@@ -3,13 +3,13 @@ import { Logins } from "../models/user.js";
 import { sendCookie } from "../utils/features.js";
 import errorhandler from "../middlewares/error.js";
 
-export const registerNewUser = async (req, res) => {
+export const registerNewUser = async (req, res,next) => {
   try {
     const { name, email, password } = req.body;
     let findUser = await Logins.findOne({ email });
 
     if (findUser) {
-      return next(new errorhandler("User Not found", 400));
+      return next(new errorhandler("User Already registered", 400));
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -46,7 +46,7 @@ export const loginUser = async (req, res, next) => {
   }
 };
 
-export const logout = (req, res) => {
+export const logout = (req, res,next) => {
   try {
     res
       .status(200)
@@ -63,7 +63,7 @@ export const logout = (req, res) => {
   }
 };
 
-export const getMyProfile = (req, res) => {
+export const getMyProfile = (req, res,next) => {
   try {
     res.status(200).json({
       success: true,

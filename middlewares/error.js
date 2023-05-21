@@ -6,8 +6,6 @@ class errorhandler extends Error{
     }
 }
 
-
-
 export const error = (err, req, res, next) => {
     err.message = err.message || "Internal Server Error";
     EvalError.statusCode = err.statusCode || 500;
