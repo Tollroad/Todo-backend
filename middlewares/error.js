@@ -12,7 +12,7 @@ export const error = (err, req, res, next) => {
 
 
 
-  return res.status(200).json({
+  return res.status(err.statusCode).json({
     message: err.message,
   });
 };
